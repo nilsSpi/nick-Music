@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   
 
+
    images=[
      './assets/img/dj1.jpg',
      './assets/img/dj2.jpg',
@@ -18,13 +19,26 @@ export class AppComponent implements OnInit {
      './assets/img/dj7.jpg',
    ];
    currentImage=0;
+   /**
+    * boolean showImage gets calld in the html via *ngIf.
+    * if true : imgElement will be displayed
+    */
    showImage = true;
-
+/**
+ * ngOnInit equals body.onload()
+ * its an interface of AppComponent
+ */
    ngOnInit() {
      this.updateImage();
 
    }
-
+   /**
+    * determens every 8 secs the index of the picture which will be displayed.
+    * images[currentTmage] will be set in the html to set the img.src.
+    * than it turns boolean showImage false , so that *ngIf will hide the img.
+    * after 1ms (timeout) it replaces the image in the html, so that the img will regain
+    * the class ImgSlider => zoomIn via @ keyframes.
+    */
    updateImage(){
      setInterval(() =>{
        this.currentImage++;
@@ -33,6 +47,7 @@ export class AppComponent implements OnInit {
 
 
        setTimeout(() => {
+        
         this.showImage=true;
        }, 1);
      },8000);
